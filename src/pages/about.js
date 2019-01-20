@@ -6,12 +6,12 @@ import SEO from '../components/seo'
 const AboutPage = () => (
   <Layout>
     <SEO title="About" keywords={[`ny`, `hype`, `supreme`]} />
-    <div class="empty">
-      <div class="empty-icon">
-        <i class="icon icon-people"></i>
+    <div className="empty">
+      <div className="empty-icon">
+        <i className="icon icon-people"></i>
       </div>
-      <p class="empty-title h5">This page is under construction</p>
-      <p class="empty-subtitle">Please come back later.</p>
+      <p className="empty-title h5">This page is under construction</p>
+      <p className="empty-subtitle">Please come back later.</p>
     </div>
   </Layout>
 )
