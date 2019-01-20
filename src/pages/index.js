@@ -7,14 +7,14 @@ import SEO from '../components/seo'
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+    <SEO title="Home" keywords={[`ny`, `hype`, `supreme`]} />
     <h1>¡Hola, amigos!</h1>
     <p>Welcome to our brand new Supreme crypto store.</p>
-    <p>Now you can buy some hype staff with BTC, LTC or even ETH.</p>
+    <p>Now you can buy some hype staff with <span class="label label-rounded label-warning">BTC</span>, <span class="label label-rounded">LTC</span> or even <span class="label label-rounded label-primary">ETH</span>.</p>
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
       <Image />
     </div>
-    <Link to="/page-2/">Go to page 2</Link>
+    <Link to="/about/">About</Link>
   </Layout>
 )
 

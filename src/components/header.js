@@ -3,9 +3,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const Header = ({ siteTitle }) => (
-  <div
+  <div className="bg-primary"
     style={{
-      background: `#ff0000`,
       marginBottom: `1.45rem`,
     }}
   >

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
+import '../scss/spectre.scss'
 import './layout.css'
 
 const Layout = ({ children }) => (
