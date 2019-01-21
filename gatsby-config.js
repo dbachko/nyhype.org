@@ -51,6 +51,16 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: `gatsby-plugin-amp`,
+      options: {
+        canonicalBaseUrl: 'https://nyhype.org/',
+        components: ['amp-form', 'amp-img'],
+        excludedPaths: ['/404*', '/'],
+        pathIdentifier: '/amp/',
+        relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',

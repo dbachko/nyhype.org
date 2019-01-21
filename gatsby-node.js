@@ -10,7 +10,6 @@ const slugify = require('@sindresorhus/slugify')
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   return new Promise((resolve, reject) => {
-    const productTemplate = path.resolve('./src/templates/product-template.js')
     resolve(
       graphql(`
         {
@@ -47,9 +46,16 @@ exports.createPages = ({ graphql, actions }) => {
               data.Color
             }-${data.Size.join('-')}`
           )
+          // Create regular product page.
           createPage({
             path: `/product/${slug}/`,
-            component: productTemplate,
+            component: path.resolve('./src/templates/product-template.js'),
+            context: { data },
+          })
+          // Create amp optimized product page.
+          createPage({
+            path: `/product/${slug}/amp/`,
+            component: path.resolve('./src/templates/product-template.amp.js'),
             context: { data },
           })
         })
