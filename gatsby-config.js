@@ -1,3 +1,5 @@
+const proxy = require('http-proxy-middleware')
+
 let activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || 'development'
 
 console.log(`Using environment config: '${activeEnv}'`)
@@ -11,6 +13,19 @@ module.exports = {
     title: `NYHYPE`,
     description: `Buy Supreme with crypto.`,
     author: `@nyhype`,
+  },
+  // for avoiding CORS while developing Netlify Functions locally
+  // read more: https://www.gatsbyjs.org/docs/api-proxy/#advanced-proxying
+  developMiddleware: app => {
+    app.use(
+      '/.netlify/functions/',
+      proxy({
+        target: 'http://localhost:9000',
+        pathRewrite: {
+          '/.netlify/functions/': '',
+        },
+      })
+    )
   },
   plugins: [
     {
