@@ -1,11 +1,11 @@
-import 'whatwg-fetch'
+import ky from 'ky';
 import React from 'react'
 // import { Router } from '@reach/router'
 
 import Layout from '../components/layout'
 
 const App = () => {
-  fetch('/.netlify/functions/hello')
+  ky.post('/.netlify/functions/hello', {json: {foo: true}})
     .then(response => response.json())
     .then(console.log)
   return (
