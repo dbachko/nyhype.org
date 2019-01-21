@@ -5,7 +5,7 @@
  */
 
 const path = require('path')
-const slugify = require('@sindresorhus/slugify');
+const slugify = require('@sindresorhus/slugify')
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators
@@ -22,6 +22,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                   Color
                   Name
                   Size
+                  Cover {
+                    thumbnails {
+                      large {
+                        url
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -35,7 +42,11 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         // Create a page for each product.
         products.forEach(({ data }) => {
           // Generate slug from product props.
-          const slug = slugify(`${data.Brand.join('-')}-${data.Name}-${data.Color}-${data.Size.join('-')}`)
+          const slug = slugify(
+            `${data.Brand.join('-')}-${data.Name}-${
+              data.Color
+            }-${data.Size.join('-')}`
+          )
           createPage({
             path: `/product/${slug}/`,
             component: productTemplate,

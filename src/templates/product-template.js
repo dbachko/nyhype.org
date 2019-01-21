@@ -4,12 +4,31 @@ import { Link } from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
-export default ({ pageContext: { data } }) => (
-  <Layout>
-    <SEO title="Shop all products" keywords={[`ny`, `hype`, `supreme`]} />
-    <div style={{ width: 960, margin: '4rem auto' }}>
-      <h1>{data.Name}</h1>
-    </div>
-    <Link to="/products/">Back to all products</Link>
-  </Layout>
-)
+export default ({ pageContext: { data } }) => {
+  // Generate title.
+  const title = `${data.Brand.join(' × ')} ${data.Name} ${
+    data.Color
+  } ${data.Size.join('-')}`
+
+  return (
+    <Layout>
+      <SEO title={title} keywords={[...data.Brand, data.Name, data.Color]} />
+      <h2>{title}</h2>
+      <div className="container">
+        <div className="columns">
+          <div className="column col-6">
+            <img
+              alt={title}
+              src={data.Cover[0].thumbnails.large.url}
+              className="img-responsive"
+            />
+          </div>
+          <div className="column col-6">
+            <button className="btn btn-success">Buy Now</button>
+          </div>
+        </div>
+      </div>
+      <Link to="/products/">Back to all products</Link>
+    </Layout>
+  )
+}
