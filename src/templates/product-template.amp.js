@@ -20,7 +20,6 @@ export default ({ pageContext: { data } }) => {
             <amp-img
               alt={title}
               src={data.Cover[0].thumbnails.large.url}
-              className="img-responsive"
               layout="responsive"
             />
           </div>

@@ -55,7 +55,6 @@ module.exports = {
       resolve: `gatsby-plugin-amp`,
       options: {
         canonicalBaseUrl: 'https://nyhype.org/',
-        components: ['amp-form', 'amp-img'],
         excludedPaths: ['/404*', '/'],
         pathIdentifier: '/amp/',
         relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',
