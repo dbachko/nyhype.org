@@ -4,7 +4,7 @@ import { StaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
 import '../scss/spectre.scss'
-import './layout.css'
+// import './layout.css'
 
 const Layout = ({ children }) => (
   <StaticQuery
