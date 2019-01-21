@@ -29,9 +29,7 @@ const Layout = ({ children }) => (
           }}
         >
           {children}
-          <footer>
-            © {new Date().getFullYear()}, NYHype.org
-          </footer>
+          <footer>© {new Date().getFullYear()}, NYHype.org</footer>
         </div>
       </>
     )}

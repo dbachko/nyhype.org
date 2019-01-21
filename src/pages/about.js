@@ -8,7 +8,7 @@ const AboutPage = () => (
     <SEO title="About" keywords={[`ny`, `hype`, `supreme`]} />
     <div className="empty">
       <div className="empty-icon">
-        <i className="icon icon-people"></i>
+        <i className="icon icon-people" />
       </div>
       <p className="empty-title h5">This page is under construction</p>
       <p className="empty-subtitle">Please come back later.</p>

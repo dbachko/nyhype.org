@@ -1,25 +1,41 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'gatsby'
+import slugify from '@sindresorhus/slugify'
 
-const ProductCard = ({data}) => {
-  const title = `${data.Brand.join(' × ')} ${data.Name}`;
+const ProductCard = ({ data }) => {
+  // Generate title.
+  const title = `${data.Brand.join(' × ')} ${data.Name}`
+  // Generate slug from product props.
+  const slug = slugify(
+    `${data.Brand.join('-')}-${data.Name}-${data.Color}-${data.Size.join('-')}`
+  )
   return (
     <div className="m-2 p-2">
-      <a className="" href="#">
+      <Link to={`/product/${slug}/`}>
         <div className="badge" data-badge={`$${data.Price}`}>
-          <img alt={title} src={data.Cover[0].thumbnails.large.url} className="img-responsive" />
+          <img
+            alt={title}
+            src={data.Cover[0].thumbnails.large.url}
+            className="img-responsive"
+          />
         </div>
         <div className="text-ellipsis" title={title}>
           {title}
         </div>
-      </a>
+      </Link>
       <div className="container">
         <div className="columns">
           <div className="column col-2 col-mr-auto col-ml-neg-6">
             <span className="chip">{data.Season}</span>
           </div>
           <div className="chip column col-6 col-lg-7 col-sm-4 col-xs-6">
-            <figure className="avatar avatar-sm" data-initial="✓" style={{backgroundColor: "#32b643"}}></figure> Free Shipping
+            <figure
+              className="avatar avatar-sm"
+              data-initial="✓"
+              style={{ backgroundColor: '#32b643' }}
+            />{' '}
+            Free Shipping
           </div>
         </div>
       </div>
