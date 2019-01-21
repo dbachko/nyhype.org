@@ -1,10 +1,11 @@
 import React from 'react'
+import fetch from 'isomorphic-fetch';
 // import { Router } from '@reach/router'
 
 import Layout from '../components/layout'
 
 const App = () => {
-  window.fetch('/.netlify/functions/hello')
+  fetch('/.netlify/functions/hello')
     .then(response => response.json())
     .then(console.log)
   return (
