@@ -16,14 +16,14 @@ export default ({ pageContext: { data } }) => {
       <h2>{title}</h2>
       <div className="container">
         <div className="columns">
-          <div className="column col-6">
+          <div className="column col-6 col-sm-12 p-2">
             <img
               alt={title}
               src={data.Cover[0].thumbnails.large.url}
               className="img-responsive"
             />
           </div>
-          <div className="column col-6">
+          <div className="column col-6 col-sm-12 p-2">
             <button className="btn btn-success">Buy Now</button>
           </div>
         </div>
