@@ -11,7 +11,7 @@ const ProductCard = ({ data }) => {
     `${data.Brand.join('-')}-${data.Name}-${data.Color}-${data.Size.join('-')}`
   )
   return (
-    <div className="m-2 p-2">
+    <div className="mt-4 pt-4">
       <Link to={`/product/${slug}/`}>
         <div className="badge" data-badge={`$${data.Price}`}>
           <img

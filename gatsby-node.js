@@ -7,8 +7,8 @@
 const path = require('path')
 const slugify = require('@sindresorhus/slugify')
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
   return new Promise((resolve, reject) => {
     const productTemplate = path.resolve('./src/templates/product-template.js')
     resolve(

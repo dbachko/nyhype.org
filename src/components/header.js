@@ -6,16 +6,10 @@ const Header = ({ siteTitle }) => (
   <div
     className="bg-primary p-1"
     style={{
-      marginBottom: `1.45rem`,
+      marginBottom: `1rem`,
     }}
   >
-    <header
-      className="navbar"
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-      }}
-    >
+    <header className="navbar container grid-lg">
       <section className="navbar-section">
         <Link to="/" className="navbar-brand mr-2 text-light">
           {siteTitle}
