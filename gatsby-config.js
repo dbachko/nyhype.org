@@ -10,7 +10,7 @@ module.exports = {
   siteMetadata: {
     title: `NYHYPE`,
     description: `Buy Supreme with crypto.`,
-    author: `@dbachko`,
+    author: `@nyhype`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
