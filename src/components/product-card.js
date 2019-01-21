@@ -18,7 +18,7 @@ const ProductCard = ({data}) => {
           <div className="column col-2 col-mr-auto col-ml-neg-6">
             <span className="chip">{data.Season}</span>
           </div>
-          <div className="chip column col-6">
+          <div className="chip column col-6 col-lg-7 col-sm-4 col-xs-6">
             <figure className="avatar avatar-sm" data-initial="✓" style={{backgroundColor: "#32b643"}}></figure> Free Shipping
           </div>
         </div>
