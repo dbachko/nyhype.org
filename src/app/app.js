@@ -36,7 +36,6 @@ const ShippingAddressForm = () => {
       }}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {
-        console.log(values)
         // Disable submit button.
         setSubmitting(true)
         // Generate charge.

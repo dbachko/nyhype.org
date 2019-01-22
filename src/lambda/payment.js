@@ -5,10 +5,7 @@ const API_ENDPOINT = 'https://api.commerce.coinbase.com/charges'
 
 exports.handler = async event => {
   const params = JSON.parse(event.body)
-  console.log(params)
   const { email, firstName, lastName } = params
-  console.log(email, firstName, lastName)
-
   try {
     // Create charge.
     const json = await fetch(API_ENDPOINT, {
@@ -32,7 +29,7 @@ exports.handler = async event => {
         pricing_type: 'fixed_price',
       }),
     }).then(response => response.json())
-    console.log(json)
+    console.log(`${email}: ${firstName} ${lastName} created charge!`)
     // Get values from response.
     const {
       data: { hosted_url: url },
