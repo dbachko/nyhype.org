@@ -26,11 +26,15 @@ exports.handler = async () => {
     }).then(response => response.json())
     console.log(json)
     // Get values from response.
-    const { hosted_url: url } = json
+    const {
+      data: { hosted_url: url },
+    } = json
     // Return url to checkout.
     return {
       statusCode: 200,
-      body: url,
+      body: JSON.stringify({
+        url,
+      }),
     }
   } catch (e) {
     return {

@@ -42,7 +42,7 @@ const ShippingAddressForm = () => {
           body: JSON.stringify(values),
         })
           .then(response => response.json())
-          .then(url => {
+          .then(({ url }) => {
             console.log(url)
             // Redirect to cb commerce checkout.
             window.location.href = url
