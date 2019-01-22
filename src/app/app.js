@@ -35,12 +35,14 @@ const ShippingAddressForm = () => {
         zip: '',
       }}
       validationSchema={validationSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        // setSubmitting(true)
-        console.log(values)
-        fetch('/.netlify/functions/hello')
-          .then(response => response.json())
-          .then(console.log)
+      onSubmit={async (values, { setSubmitting }) => {
+        setSubmitting(true)
+        const url = await fetch('/.netlify/functions/hello', {
+          method: 'POST',
+          body: JSON.stringify(values),
+        }).then(response => response.json())
+        // Redirect to cb commerce checkout.
+        window.location.href = url
       }}
     >
       {({ errors, touched, isSubmitting }) => (
