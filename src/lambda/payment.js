@@ -1,11 +1,10 @@
 import fetch from 'isomorphic-fetch'
-import querystring from 'querystring'
 
 const { CB_COMMERCE_API_KEY } = process.env
 const API_ENDPOINT = 'https://api.commerce.coinbase.com/charges'
 
 exports.handler = async event => {
-  const params = querystring.parse(event.body)
+  const params = JSON.parse(event.body)
   console.log(params)
   const { email, firstName, lastName } = params
   console.log(email, firstName, lastName)
