@@ -6,6 +6,7 @@
   "author": "Dzmitry Bachko <dbachko@gmail.com>",
   "dependencies": {
     "@sindresorhus/slugify": "^0.8.0",
+    "formik": "^1.4.2",
     "gatsby": "^2.0.76",
     "gatsby-image": "^2.0.20",
     "gatsby-plugin-amp": "^0.1.26",
@@ -24,7 +25,8 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
-    "spectre.css": "^0.5.8"
+    "spectre.css": "^0.5.8",
+    "yup": "^0.26.7"
   },
   "keywords": [
     "ny",
