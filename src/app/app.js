@@ -7,29 +7,32 @@ import Layout from '../components/layout'
 
 const ShippingAddressForm = () => {
   const validationSchema = object().shape({
+    address: string().required('Address is required!'),
+    city: string().required('City is required!'),
     email: string()
       .email('E-mail is not valid!')
       .required('E-mail is required!'),
     firstName: string().required('First name is required!'),
     lastName: string().required('Last name is required!'),
-    street: string().required('Address is required!'),
-    city: string().required('City is required!'),
     state: string().required('State is required!'),
     zip: string()
-      .matches(/^\d+$/, 'Invalid zip code')
-      .min(5, 'Invalid zip code')
-      .max(5, 'Invalid zip code')
-      .required('Zip code is required!'),
+      .matches(/^\d+$/, 'Invalid zip!')
+      .min(5, 'Invalid zip!')
+      .max(5, 'Invalid zip!')
+      .required('Zip is required!'),
   })
 
   return (
     <Formik
       initialValues={{
+        address: '',
+        city: '',
+        country: 'USA',
         email: '',
         firstName: '',
         lastName: '',
-        country: 'us',
-        city: '',
+        state: '',
+        zip: '',
       }}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {
@@ -109,18 +112,18 @@ const ShippingAddressForm = () => {
               <div className="column col-10 p-2">
                 <div
                   className={`form-group ${
-                    errors.street && touched.street ? 'has-error' : ''
+                    errors.address && touched.address ? 'has-error' : ''
                   }`}
                 >
-                  <label htmlFor="street">Address</label>
+                  <label htmlFor="address">Address</label>
                   <Field
                     type="text"
-                    name="street"
+                    name="address"
                     className="form-input"
                     placeholder="1 Broadway"
                   />
                   <ErrorMessage
-                    name="street"
+                    name="address"
                     component="span"
                     className="form-input-hint"
                   />
@@ -182,7 +185,7 @@ const ShippingAddressForm = () => {
                     placeholder="1 Broadway"
                     disabled
                   >
-                    <option value="us">United States</option>
+                    <option value="USA">United States</option>
                   </Field>
                   <ErrorMessage
                     name="country"
@@ -202,9 +205,8 @@ const ShippingAddressForm = () => {
                     component="select"
                     name="state"
                     className="form-select"
-                    placeholder="NY"
                   >
-                    <option>Choose state</option>
+                    <option value="">Choose state</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
                     <option value="AZ">Arizona</option>
@@ -276,7 +278,7 @@ const ShippingAddressForm = () => {
                     name="zip"
                     className="form-input"
                     placeholder="10001"
-                    maxlength="5"
+                    maxLength="5"
                   />
                   <ErrorMessage
                     name="zip"
