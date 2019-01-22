@@ -1,16 +1,31 @@
-// from https://github.com/netlify/create-react-app-lambda/blob/master/src/lambda/hello.js
+import fetch from 'isomorphic-fetch'
 
-// show object spread works, i.e. babel works
-const obj = {
-  foo: 'bar',
-}
-export function handler(event, context, callback) {
-  console.log('queryStringParameters', event.queryStringParameters)
-  callback(null, {
-    statusCode: 200,
+const { CB_COMMERCE_API_KEY } = process.env
+const API_ENDPOINT = 'https://api.commerce.coinbase.com/checkouts'
+
+exports.handler = async () => {
+  return fetch(API_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CC-Api-Key': CB_COMMERCE_API_KEY,
+      'X-CC-Version': '2018-03-22',
+    },
     body: JSON.stringify({
-      msg: 'Hello, World! ' + Math.round(Math.random() * 10),
-      ...obj,
+      name: 'The Sovereign Individual',
+      description: 'Mastering the Transition to the Information Age',
+      local_price: {
+        amount: '100.00',
+        currency: 'USD',
+      },
+      pricing_type: 'fixed_price',
+      requested_info: ['email'],
     }),
   })
+    .then(response => response.json())
+    .then(data => ({
+      statusCode: 200,
+      body: data,
+    }))
+    .catch(error => ({ statusCode: 422, body: String(error) }))
 }

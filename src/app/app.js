@@ -36,11 +36,11 @@ const ShippingAddressForm = () => {
       }}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {
-        setSubmitting(true)
+        // setSubmitting(true)
         console.log(values)
-        // fetch('/.netlify/functions/hello')
-        //   .then(response => response.json())
-        //   .then(console.log)
+        fetch('/.netlify/functions/hello')
+          .then(response => response.json())
+          .then(console.log)
       }}
     >
       {({ errors, touched, isSubmitting }) => (
