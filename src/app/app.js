@@ -36,15 +36,17 @@ const ShippingAddressForm = () => {
       }}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {
+        console.log(values)
+        // Disable submit button.
         setSubmitting(true)
+        // Generate charge.
         fetch('/.netlify/functions/payment', {
           method: 'POST',
           body: JSON.stringify(values),
         })
           .then(response => response.json())
           .then(({ url }) => {
-            console.log(url)
-            // Redirect to cb commerce checkout.
+            // Redirect customer to cb commerce checkout.
             window.location.href = url
           })
       }}

@@ -6,7 +6,9 @@ const API_ENDPOINT = 'https://api.commerce.coinbase.com/charges'
 
 exports.handler = async event => {
   const params = querystring.parse(event.body)
+  console.log(params)
   const { email, firstName, lastName } = params
+  console.log(email, firstName, lastName)
 
   try {
     // Create charge.
@@ -25,7 +27,7 @@ exports.handler = async event => {
           currency: 'USD',
         },
         metadata: {
-          customer_email: email,
+          customer_id: email,
           customer_name: `${firstName} ${lastName}`,
         },
         pricing_type: 'fixed_price',
