@@ -42,6 +42,10 @@ const ShippingAddressForm = () => {
         // Generate charge.
         fetch('/.netlify/functions/payment', {
           method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify(values),
         })
           .then(response => response.json())
