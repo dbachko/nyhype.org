@@ -37,7 +37,7 @@ const ShippingAddressForm = () => {
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(true)
-        fetch('/.netlify/functions/hello', {
+        fetch('/.netlify/functions/payment', {
           method: 'POST',
           body: JSON.stringify(values),
         })

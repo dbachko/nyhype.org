@@ -1,11 +1,15 @@
 import fetch from 'isomorphic-fetch'
+import querystring from 'querystring'
 
 const { CB_COMMERCE_API_KEY } = process.env
 const API_ENDPOINT = 'https://api.commerce.coinbase.com/charges'
 
-exports.handler = async () => {
+exports.handler = async event => {
+  const params = querystring.parse(event.body)
+  const { email, firstName, lastName } = params
+
   try {
-    // Create checkout.
+    // Create charge.
     const json = await fetch(API_ENDPOINT, {
       method: 'POST',
       headers: {
@@ -14,14 +18,17 @@ exports.handler = async () => {
         'X-CC-Version': '2018-03-22',
       },
       body: JSON.stringify({
-        name: 'The Sovereign Individual',
-        description: 'Mastering the Transition to the Information Age',
+        name: 'Supreme × Nike Vapor Jet 4.0 Football Gloves Red Large',
+        description: '100% Authentic',
         local_price: {
-          amount: '100.00',
+          amount: '1.00',
           currency: 'USD',
         },
+        metadata: {
+          customer_email: email,
+          customer_name: `${firstName} ${lastName}`,
+        },
         pricing_type: 'fixed_price',
-        requested_info: ['email'],
       }),
     }).then(response => response.json())
     console.log(json)
@@ -29,7 +36,7 @@ exports.handler = async () => {
     const {
       data: { hosted_url: url },
     } = json
-    // Return url to checkout.
+    // Return url to charge.
     return {
       statusCode: 200,
       body: JSON.stringify({
@@ -37,6 +44,7 @@ exports.handler = async () => {
       }),
     }
   } catch (e) {
+    console.error(e)
     return {
       statusCode: 422,
       body: String(e),
