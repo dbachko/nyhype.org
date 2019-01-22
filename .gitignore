@@ -56,6 +56,9 @@ typings/
 .env.development
 .env.production
 
+# netlify built functions
+.functions
+
 # gatsby files
 .cache/
 public
