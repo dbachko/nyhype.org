@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import Img from 'gatsby-image'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
-export default ({ pageContext: { data } }) => {
+export default ({ pageContext: { data, localFile } }) => {
   // Generate title.
   const title = `${data.Brand.join(' × ')} ${data.Name} ${
     data.Color
@@ -17,10 +18,10 @@ export default ({ pageContext: { data } }) => {
       <div className="container">
         <div className="columns">
           <div className="column col-6 col-sm-12 p-2">
-            <img
+            <Img
               alt={title}
-              src={data.Cover[0].thumbnails.large.url}
               className="img-responsive"
+              fluid={localFile.childImageSharp.fluid}
             />
           </div>
           <div className="column col-6 col-sm-12 p-2">

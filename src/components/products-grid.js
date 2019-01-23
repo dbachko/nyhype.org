@@ -10,9 +10,9 @@ const ProductsGrid = () => (
       const products = data.allAirtable.edges.map(edge => edge.node)
       return (
         <div className="columns">
-          {products.map(({ id, data }) => (
+          {products.map(({ id, data, fields: { localFile } }) => (
             <div className="column col-4 col-md-6 col-sm-12" key={id}>
-              <ProductCard data={data} />
+              <ProductCard data={data} cover={localFile} />
             </div>
           ))}
         </div>
@@ -25,7 +25,7 @@ export default ProductsGrid
 
 const productsQuery = graphql`
   {
-    allAirtable(sort: { fields: [data___Created] }) {
+    allAirtable(sort: { fields: [data___In_Stock, data___Created] }) {
       edges {
         node {
           id
@@ -36,10 +36,18 @@ const productsQuery = graphql`
             Price
             Season
             Size
-            Cover {
-              thumbnails {
-                large {
-                  url
+          }
+          fields {
+            localFile {
+              publicURL
+              childImageSharp {
+                fluid(maxWidth: 300, quality: 75) {
+                  aspectRatio
+                  src
+                  srcSet
+                  srcWebp
+                  srcSetWebp
+                  sizes
                 }
               }
             }

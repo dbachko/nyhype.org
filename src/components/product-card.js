@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
+import Img from 'gatsby-image'
 import slugify from '@sindresorhus/slugify'
 
-const ProductCard = ({ data }) => {
+const ProductCard = ({ data, cover }) => {
   // Generate title.
   const title = `${data.Brand.join(' × ')} ${data.Name}`
   // Generate slug from product props.
@@ -14,10 +15,10 @@ const ProductCard = ({ data }) => {
     <div className="mt-4 pt-4">
       <Link to={`/product/${slug}/`}>
         <div className="badge" data-badge={`$${data.Price}`}>
-          <img
+          <Img
             alt={title}
-            src={data.Cover[0].thumbnails.large.url}
             className="img-responsive"
+            fluid={cover.childImageSharp.fluid}
           />
         </div>
         <div className="text-ellipsis" title={title}>
@@ -45,10 +46,7 @@ const ProductCard = ({ data }) => {
 
 ProductCard.propTypes = {
   data: PropTypes.object,
-}
-
-ProductCard.defaultProps = {
-  data: {},
+  cover: PropTypes.object,
 }
 
 export default ProductCard
