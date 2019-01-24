@@ -32,3 +32,10 @@
     color: #66758c;
   }
 }
+
+@media (max-width: $size-md) {
+  .docs-footer,
+  .links {
+    text-align: center;
+  }
+}

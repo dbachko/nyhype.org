@@ -5,10 +5,10 @@ const Footer = () => (
   <footer className="site-footer">
     <div className="container docs-footer">
       <div className="columns">
-        <div className="column col-4 col-sm-12 copyright">
+        <div className="column col-4 col-md-12 copyright">
           <span>© {new Date().getFullYear()} NYHype.org</span>
         </div>
-        <div className="column col-8 col-sm-12 text-right">
+        <div className="column col-8 col-md-12 text-right">
           <div className="links">
             <Link to="/contact/">
               Contact<span className="hide-sm"> Us</span>
