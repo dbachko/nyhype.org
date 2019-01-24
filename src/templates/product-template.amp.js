@@ -1,34 +1,33 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
+import Breadcrumb from '../components/breadcrumb'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
-export default ({ pageContext: { data } }) => {
-  // Generate title.
-  const title = `${data.Brand.join(' × ')} ${data.Name} ${
-    data.Color
-  } ${data.Size.join('-')}`
-
+export default ({ pageContext: { id, fields } }) => {
+  const { brand, color, cover, name, slug, title } = fields
   return (
     <Layout>
-      <SEO title={title} keywords={[...data.Brand, data.Name, data.Color]} />
-      <h2>{title}</h2>
-      <div className="container">
+      <SEO title={title} keywords={[...brand, name, color]} />
+      <Breadcrumb slug={slug} title={title} pos={2} />
+      <div className="">
         <div className="columns">
           <div className="column col-6 col-sm-12 p-2">
             <amp-img
               alt={title}
-              src={data.Cover[0].thumbnails.large.url}
+              src={cover.thumbnails.large.url}
               layout="responsive"
             />
           </div>
           <div className="column col-6 col-sm-12 p-2">
-            <button className="btn btn-success">Buy Now</button>
+            <h2>{title}</h2>
+            <Link to={`/checkout/${id}`}>
+              <button className="btn btn-success">Buy Now</button>
+            </Link>
           </div>
         </div>
       </div>
-      <Link to="/products/">Back to all products</Link>
     </Layout>
   )
 }

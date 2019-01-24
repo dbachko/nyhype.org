@@ -69,7 +69,8 @@ exports.onCreateNode = async ({
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  const productTemplate = path.resolve('./src/templates/product-template.js')
+  const productTpl = path.resolve('./src/templates/product-template.js')
+  const productTplAmp = path.resolve('./src/templates/product-template.amp.js')
   return new Promise((resolve, reject) => {
     resolve(
       graphql(`
@@ -109,7 +110,13 @@ exports.createPages = async ({ graphql, actions }) => {
           // Create regular product page.
           await createPage({
             path: fields.slug,
-            component: productTemplate,
+            component: productTpl,
+            context: { id, fields },
+          })
+          // Create amp version of a product page.
+          await createPage({
+            path: `${fields.slug}amp/`,
+            component: productTplAmp,
             context: { id, fields },
           })
         }

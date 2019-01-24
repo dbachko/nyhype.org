@@ -6,7 +6,7 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 
 export default ({ pageContext: { id, fields } }) => {
-  const { title, slug, brand, name, color, cover } = fields
+  const { brand, color, cover, name, slug, title } = fields
   return (
     <Layout>
       <SEO title={title} keywords={[...brand, name, color]} />
