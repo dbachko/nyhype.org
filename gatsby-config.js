@@ -86,9 +86,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-netlify`,
       options: {
-        allPageHeaders: [
-          "SecretGame; LYbmoT4ah5GpKX7UhbPNsm5jKvB1udWmhe;"
-        ],
+        allPageHeaders: [],
       },
     },
   ],
