@@ -5,17 +5,18 @@ import Breadcrumb from '../components/breadcrumb'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
-export default ({ pageContext: { id, data, slug, title } }) => {
+export default ({ pageContext: { id, fields } }) => {
+  const { title, slug, brand, name, color, cover } = fields
   return (
     <Layout>
-      <SEO title={title} keywords={[...data.Brand, data.Name, data.Color]} />
+      <SEO title={title} keywords={[...brand, name, color]} />
       <Breadcrumb slug={slug} title={title} pos={2} />
       <div className="">
         <div className="columns">
           <div className="column col-6 col-sm-12 p-2">
             <img
               alt={title}
-              src={data.Cover[0].thumbnails.large.url}
+              src={cover.thumbnails.large.url}
               className="img-responsive"
             />
           </div>

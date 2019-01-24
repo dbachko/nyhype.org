@@ -23,6 +23,33 @@ exports.onCreateNode = async ({
 }) => {
   const { createNodeField } = actions
   if (node.internal.type === 'Airtable') {
+    const { data } = node
+    const fieldsMap = new Map([
+      ['Brand', 'brand'],
+      ['Color', 'color'],
+      ['Description', 'desc'],
+      ['In_Stock', 'inStock'],
+      ['Name', 'name'],
+      ['Price', 'price'],
+      ['Season', 'season'],
+      ['Size', 'size'],
+    ])
+    for (let [key, val] of fieldsMap.entries()) {
+      if (data.hasOwnProperty(key)) {
+        // Generate appropriate field.
+        await createNodeField({
+          node,
+          name: val,
+          value: data[key],
+        })
+      }
+    }
+    // Generate cover field.
+    createNodeField({
+      node,
+      name: 'cover',
+      value: data.Cover[0],
+    })
     // Generate title field.
     const title = createTitle(node.data)
     createNodeField({
@@ -51,22 +78,22 @@ exports.createPages = async ({ graphql, actions }) => {
             edges {
               node {
                 id
-                data {
-                  Brand
-                  Color
-                  Name
-                  Size
-                  Cover {
+                fields {
+                  brand
+                  color
+                  desc
+                  inStock
+                  name
+                  size
+                  slug
+                  title
+                  cover {
                     thumbnails {
                       large {
                         url
                       }
                     }
                   }
-                }
-                fields {
-                  slug
-                  title
                 }
               }
             }
@@ -78,17 +105,12 @@ exports.createPages = async ({ graphql, actions }) => {
         }
         const products = result.data.allAirtable.edges.map(edge => edge.node)
         // Create a page for each product.
-        for (let product of products) {
-          const {
-            id,
-            data,
-            fields: { slug, title },
-          } = product
+        for (let {id, fields} of products) {
           // Create regular product page.
           await createPage({
-            path: slug,
+            path: fields.slug,
             component: productTemplate,
-            context: { id, data, slug, title },
+            context: { id, fields },
           })
         }
       })

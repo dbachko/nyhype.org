@@ -13,9 +13,9 @@ const ProductsGrid = () => (
         <>
           <Breadcrumb pos={1} />
           <div className="columns">
-            {products.map(({ id, data, fields }) => (
+            {products.map(({ id, fields }) => (
               <div className="column col-4 col-md-6 col-sm-12" key={id}>
-                <ProductCard data={data} fields={fields} />
+                <ProductCard fields={fields} />
               </div>
             ))}
           </div>
@@ -33,24 +33,24 @@ const productsQuery = graphql`
       edges {
         node {
           id
-          data {
-            Brand
-            Color
-            Name
-            Price
-            Season
-            Size
-            Cover {
+          fields {
+            brand
+            color
+            desc
+            inStock
+            name
+            price
+            season
+            size
+            slug
+            title
+            cover {
               thumbnails {
                 large {
                   url
                 }
               }
             }
-          }
-          fields {
-            slug
-            title
           }
         }
       }

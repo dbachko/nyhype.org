@@ -82,5 +82,14 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     'gatsby-plugin-offline',
+    // make sure to put last in the array
+    {
+      resolve: `gatsby-plugin-netlify`,
+      options: {
+        allPageHeaders: [
+          "SecretGame; LYbmoT4ah5GpKX7UhbPNsm5jKvB1udWmhe;"
+        ],
+      },
+    },
   ],
 }
