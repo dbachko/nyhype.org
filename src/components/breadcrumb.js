@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const Breadcrumb = ({ slug, title, pos }) => (
-  <ul className="breadcrumb">
+  <ul className="breadcrumb text-ellipsis pr-1">
     <li className="breadcrumb-item">
       <Link to="/">Home</Link>
     </li>

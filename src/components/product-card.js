@@ -5,7 +5,7 @@ import { Link } from 'gatsby'
 const ProductCard = ({ fields }) => {
   const { cover, price, season, slug, title } = fields
   return (
-    <div className="mt-4 pt-4">
+    <div className="mb-4 pb-4">
       <Link to={slug}>
         <div className="badge" data-badge={`$${price}`}>
           <img
