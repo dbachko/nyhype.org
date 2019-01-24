@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
+import Footer from './footer'
 import '../scss/spectre.scss'
 
 const Layout = ({ children }) => (
@@ -21,7 +22,7 @@ const Layout = ({ children }) => (
         <Header siteTitle={data.site.siteMetadata.title} />
         <div className="container grid-lg">
           {children}
-          <footer>© {new Date().getFullYear()}, NYHype.org</footer>
+          <Footer />
         </div>
       </>
     )}

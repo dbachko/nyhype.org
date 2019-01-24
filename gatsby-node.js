@@ -7,8 +7,42 @@
 const path = require('path')
 const slugify = require('@sindresorhus/slugify')
 
-exports.createPages = ({ graphql, actions }) => {
+// Create product title from it's fields.
+const createTitle = ({ Brand, Name, Color, Size }) =>
+  `${Brand.join(' × ')} ${Name} ${Color} ${Size}`
+
+// Create product slug from it's title.
+const createSlug = title => `/product/${slugify(title)}/`
+
+exports.onCreateNode = async ({
+  node,
+  actions,
+  createNodeId,
+  store,
+  cache,
+}) => {
+  const { createNodeField } = actions
+  if (node.internal.type === 'Airtable') {
+    // Generate title field.
+    const title = createTitle(node.data)
+    createNodeField({
+      node,
+      name: 'title',
+      value: title,
+    })
+    // Generate slug field.
+    const slug = createSlug(title)
+    createNodeField({
+      node,
+      name: 'slug',
+      value: slug,
+    })
+  }
+}
+
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
+  const productTemplate = path.resolve('./src/templates/product-template.js')
   return new Promise((resolve, reject) => {
     resolve(
       graphql(`
@@ -16,6 +50,7 @@ exports.createPages = ({ graphql, actions }) => {
           allAirtable {
             edges {
               node {
+                id
                 data {
                   Brand
                   Color
@@ -29,36 +64,33 @@ exports.createPages = ({ graphql, actions }) => {
                     }
                   }
                 }
+                fields {
+                  slug
+                  title
+                }
               }
             }
           }
         }
-      `).then(result => {
+      `).then(async result => {
         if (result.error) {
           reject(result.error)
         }
         const products = result.data.allAirtable.edges.map(edge => edge.node)
         // Create a page for each product.
-        products.forEach(({ data }) => {
-          // Generate slug from product props.
-          const slug = slugify(
-            `${data.Brand.join('-')}-${data.Name}-${
-              data.Color
-            }-${data.Size.join('-')}`
-          )
+        for (let product of products) {
+          const {
+            id,
+            data,
+            fields: { slug, title },
+          } = product
           // Create regular product page.
-          createPage({
-            path: `/product/${slug}/`,
-            component: path.resolve('./src/templates/product-template.js'),
-            context: { data },
+          await createPage({
+            path: slug,
+            component: productTemplate,
+            context: { id, data, slug, title },
           })
-          // Create amp optimized product page.
-          createPage({
-            path: `/product/${slug}/amp/`,
-            component: path.resolve('./src/templates/product-template.amp.js'),
-            context: { data },
-          })
-        })
+        }
       })
     )
   })

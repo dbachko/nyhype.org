@@ -1,6 +1,7 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 
+import Breadcrumb from './breadcrumb'
 import ProductCard from './product-card'
 
 const ProductsGrid = () => (
@@ -9,13 +10,16 @@ const ProductsGrid = () => (
     render={data => {
       const products = data.allAirtable.edges.map(edge => edge.node)
       return (
-        <div className="columns">
-          {products.map(({ id, data }) => (
-            <div className="column col-4 col-md-6 col-sm-12" key={id}>
-              <ProductCard data={data} />
-            </div>
-          ))}
-        </div>
+        <>
+          <Breadcrumb pos={1} />
+          <div className="columns">
+            {products.map(({ id, data, fields }) => (
+              <div className="column col-4 col-md-6 col-sm-12" key={id}>
+                <ProductCard data={data} fields={fields} />
+              </div>
+            ))}
+          </div>
+        </>
       )
     }}
   />
@@ -25,7 +29,7 @@ export default ProductsGrid
 
 const productsQuery = graphql`
   {
-    allAirtable(sort: { fields: [data___Created] }) {
+    allAirtable(sort: { fields: [data___In_Stock, data___Created] }) {
       edges {
         node {
           id
@@ -43,6 +47,10 @@ const productsQuery = graphql`
                 }
               }
             }
+          }
+          fields {
+            slug
+            title
           }
         }
       }

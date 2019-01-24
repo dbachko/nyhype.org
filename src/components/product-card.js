@@ -1,18 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import slugify from '@sindresorhus/slugify'
 
-const ProductCard = ({ data }) => {
-  // Generate title.
-  const title = `${data.Brand.join(' × ')} ${data.Name}`
-  // Generate slug from product props.
-  const slug = slugify(
-    `${data.Brand.join('-')}-${data.Name}-${data.Color}-${data.Size.join('-')}`
-  )
+const ProductCard = ({ data, fields }) => {
+  const { slug, title } = fields;
   return (
     <div className="mt-4 pt-4">
-      <Link to={`/product/${slug}/`}>
+      <Link to={slug}>
         <div className="badge" data-badge={`$${data.Price}`}>
           <img
             alt={title}
@@ -45,10 +39,7 @@ const ProductCard = ({ data }) => {
 
 ProductCard.propTypes = {
   data: PropTypes.object,
-}
-
-ProductCard.defaultProps = {
-  data: {},
+  fields: PropTypes.object,
 }
 
 export default ProductCard

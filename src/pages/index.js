@@ -1,23 +1,26 @@
 import React from 'react'
+import { Link } from 'gatsby'
 
 import Layout from '../components/layout'
-import Image from '../components/image'
 import SEO from '../components/seo'
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`ny`, `hype`, `supreme`]} />
-    <h1>¡Hola, amigos!</h1>
-    <p>Welcome to our brand new Supreme crypto store.</p>
+    <h1>NYHype - Supreme Streetwear!</h1>
+    <p>Welcome to our brand new crypto store.</p>
     <p>
-      Now you can buy some hype staff with{' '}
+      Now you can buy some hype with{' '}
       <span className="label label-rounded label-warning">BTC</span>,{' '}
-      <span className="label label-rounded">LTC</span> or even{' '}
+      <span className="label label-rounded">LTC</span> or{' '}
       <span className="label label-rounded label-primary">ETH</span>.
     </p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
+    <p>
+      Please take a look at our {' '}
+      <Link to="/products/">
+        products collection
+      </Link>
+    </p>
   </Layout>
 )
 

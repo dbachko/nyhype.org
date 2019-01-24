@@ -1,11 +1,9 @@
-import React from 'react'
 import fetch from 'isomorphic-fetch'
+import React from 'react'
 import { string, object } from 'yup'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 
-import Layout from '../components/layout'
-
-const ShippingAddressForm = () => {
+const CheckoutForm = () => {
   const validationSchema = object().shape({
     address: string().required('Address is required!'),
     city: string().required('City is required!'),
@@ -314,20 +312,4 @@ const ShippingAddressForm = () => {
   )
 }
 
-const App = () => {
-  return (
-    <Layout>
-      <h5>Shipping info:</h5>
-      <div className="container">
-        <div className="columns">
-          <div className="column col-6 col-sm-12 p-2">
-            <ShippingAddressForm />
-          </div>
-          <div className="column col-6 col-sm-12 p-2" />
-        </div>
-      </div>
-    </Layout>
-  )
-}
-
-export default App
+export default CheckoutForm
