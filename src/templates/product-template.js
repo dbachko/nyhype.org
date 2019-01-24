@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { navigate } from '@reach/router'
 
 import Breadcrumb from '../components/breadcrumb'
 import Layout from '../components/layout'
@@ -7,6 +7,11 @@ import SEO from '../components/seo'
 
 export default ({ pageContext: { id, fields } }) => {
   const { brand, color, cover, name, slug, title } = fields
+
+  const handleClick = async function() {
+    await navigate(`/checkout/${id}`, { state: { fields } })
+  }
+
   return (
     <Layout>
       <SEO title={title} keywords={[...brand, name, color]} />
@@ -22,9 +27,9 @@ export default ({ pageContext: { id, fields } }) => {
           </div>
           <div className="column col-6 col-sm-12 p-2">
             <h2>{title}</h2>
-            <Link to={`/checkout/${id}`}>
-              <button className="btn btn-success">Buy Now</button>
-            </Link>
+            <button className="btn btn-success" onClick={handleClick}>
+              Buy Now
+            </button>
           </div>
         </div>
       </div>

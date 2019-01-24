@@ -3,7 +3,7 @@ import React from 'react'
 import { string, object } from 'yup'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 
-const CheckoutForm = () => {
+const CheckoutForm = props => {
   const validationSchema = object().shape({
     address: string().required('Address is required!'),
     city: string().required('City is required!'),
@@ -43,7 +43,10 @@ const CheckoutForm = () => {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(values),
+          body: JSON.stringify({
+            ...props,
+            ...values,
+          }),
         })
           .then(response => response.json())
           .then(({ url }) => {
@@ -298,10 +301,9 @@ const CheckoutForm = () => {
               </div>
             </div>
           </div>
-          <div className="divider text-center" data-content="ℼ" />
           <button
             type="submit"
-            className="btn btn-primary float-right"
+            className="btn btn-primary float-right mt-2"
             disabled={isSubmitting}
           >
             Continue to Payment

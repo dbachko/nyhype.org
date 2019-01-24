@@ -5,7 +5,7 @@ const API_ENDPOINT = 'https://api.commerce.coinbase.com/charges'
 
 exports.handler = async event => {
   const params = JSON.parse(event.body)
-  const { email, firstName, lastName } = params
+  const { email, firstName, lastName, price, title, productId } = params
   try {
     // Create charge.
     const json = await fetch(API_ENDPOINT, {
@@ -16,10 +16,10 @@ exports.handler = async event => {
         'X-CC-Version': '2018-03-22',
       },
       body: JSON.stringify({
-        name: 'Supreme × Nike Vapor Jet 4.0 Football Gloves Red Large',
+        name: title,
         description: '100% Authentic',
         local_price: {
-          amount: '1.00',
+          amount: price,
           currency: 'USD',
         },
         metadata: {
@@ -29,7 +29,9 @@ exports.handler = async event => {
         pricing_type: 'fixed_price',
       }),
     }).then(response => response.json())
-    console.log(`${email}: ${firstName} ${lastName} created charge!`)
+    console.log(
+      `${email}: ${firstName} ${lastName} created charge of ${price} for ${productId}!`
+    )
     // Get values from response.
     const {
       data: { hosted_url: url },

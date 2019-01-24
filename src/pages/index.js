@@ -16,10 +16,7 @@ const IndexPage = () => (
       <span className="label label-rounded label-primary">ETH</span>.
     </p>
     <p>
-      Please take a look at our {' '}
-      <Link to="/products/">
-        products collection
-      </Link>
+      Please take a look at our <Link to="/products/">products collection</Link>
     </p>
   </Layout>
 )

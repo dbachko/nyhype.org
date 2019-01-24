@@ -85,6 +85,8 @@ exports.createPages = async ({ graphql, actions }) => {
                   desc
                   inStock
                   name
+                  price
+                  season
                   size
                   slug
                   title
@@ -106,7 +108,7 @@ exports.createPages = async ({ graphql, actions }) => {
         }
         const products = result.data.allAirtable.edges.map(edge => edge.node)
         // Create a page for each product.
-        for (let {id, fields} of products) {
+        for (let { id, fields } of products) {
           // Create regular product page.
           await createPage({
             path: fields.slug,
