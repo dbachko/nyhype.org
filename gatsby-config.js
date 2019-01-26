@@ -48,8 +48,8 @@ module.exports = {
         name: `nyhype.org`,
         short_name: `nyhype`,
         start_url: `/`,
-        background_color: `#5755d9`,
-        theme_color: `#5755d9`,
+        background_color: `#3b4351`,
+        theme_color: `#3b4351`,
         display: `minimal-ui`,
         icon: `src/images/nyhype-logo.png`, // This path is relative to the root of the site.
       },
