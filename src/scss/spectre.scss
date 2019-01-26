@@ -1,7 +1,17 @@
+// Load additional fonts.
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two');
+
 // Load scpectre styles.
 @import 'node_modules/spectre.css/src/spectre.scss';
 @import 'node_modules/spectre.css/src/spectre-icons.scss';
 @import 'node_modules/spectre.css/src/spectre-exp.scss';
+
+// Navbar.
+.navbar-brand {
+  font-family: 'Shadows Into Light Two', cursive;
+  font-weight: bold;
+  letter-spacing: 8px;
+}
 
 // Product styles.
 .brand-name {

@@ -4,7 +4,7 @@ import React from 'react'
 
 const Header = ({ siteTitle }) => (
   <div
-    className="bg-primary p-1"
+    className="bg-dark p-1"
     style={{
       marginBottom: `1rem`,
     }}
