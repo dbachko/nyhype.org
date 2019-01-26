@@ -3,6 +3,36 @@
 @import 'node_modules/spectre.css/src/spectre-icons.scss';
 @import 'node_modules/spectre.css/src/spectre-exp.scss';
 
+// Product styles.
+.brand-name {
+  font-weight: 200;
+  margin: 0;
+}
+
+.product-price {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.product-details {
+  margin-bottom: 0.4rem;
+  .tile {
+    border-bottom: 1px dashed #bcc3ce;
+  }
+}
+
+.pay-with--text {
+  background: initial;
+}
+
+.purchase-opts {
+  font-size: 0.6rem;
+}
+
+// Checkout.
+.checkout-total {
+}
+
 // marging bottom.
 .mb-4 {
   margin-bottom: 0.8rem;

@@ -92,6 +92,9 @@ exports.createPages = async ({ graphql, actions }) => {
                   title
                   cover {
                     thumbnails {
+                      small {
+                        url
+                      }
                       large {
                         url
                       }
