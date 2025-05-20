@@ -1,0 +1,3 @@
+// This directory will contain baseline images for visual regression tests
+// The baseline images will be generated when the tests are run the first time
+// or when the tests are run with the -u flag
