@@ -1,0 +1,60 @@
+{
+  "description": "nyhype.org - A Gatsby-based e-commerce site for buying Supreme with cryptocurrency",
+  "instructions": "# NYHYPE.ORG Project Guide\n\n## Project Overview\n\nNYHYPE.ORG is an e-commerce platform built with Gatsby that allows users to purchase Supreme products using cryptocurrency via Coinbase Commerce integration. The site fetches product data from Airtable.\n\n## Technology Stack\n\n- **Frontend**: Gatsby (React-based), Spectre CSS, SCSS\n- **Authentication/Forms**: Formik with Yup validation\n- **CMS**: Airtable for product data\n- **Backend Functions**: Netlify Lambda\n- **Payment Processing**: Coinbase Commerce API\n- **Deployment**: Netlify\n\n## Project Structure\n\n- `/src/app/` - Client-side routed application components\n- `/src/components/` - Shared React components\n- `/src/lambda/` - Netlify serverless functions\n- `/src/pages/` - Gatsby page components\n- `/src/templates/` - Gatsby templates for dynamic page generation\n- `/src/scss/` - SCSS stylesheets including Spectre CSS customization\n- `/src/images/` - Static image assets\n\n## Development Workflow\n\n### Environment Setup\n\n1. Clone the repository\n2. Install dependencies: `npm install`\n3. Create a `.env.development` file based on `.env.example` with the following variables:\n   - `AIRTABLE_KEY` - Airtable API key\n   - `AIRTABLE_BASE_ID` - Airtable base ID\n   - `TABLE_NAME` - Airtable table name\n   - `CB_COMMERCE_API_KEY` - Coinbase Commerce API key\n   - `SITE_RECAPTCHA_KEY` - Google reCAPTCHA key (if enabled)\n   - `SITE_RECAPTCHA_SECRET` - Google reCAPTCHA secret (if enabled)\n\n### Development Commands\n\n- **Start development server**: `npm run develop` or `gatsby develop`\n- **Start development server with Lambda functions**: `npm start`\n  - This runs both the Gatsby dev server and Netlify Lambda functions server\n- **Format code**: `npm run format`\n- **Build for production**: `npm run build`\n  - This builds both the Gatsby site and Lambda functions\n\n### Key Files and Configuration\n\n- `gatsby-config.js` - Gatsby configuration including plugins\n- `gatsby-node.js` - Gatsby Node API implementations for creating pages from Airtable data\n- `netlify.toml` - Netlify deployment configuration\n\n## Implementation Notes\n\n### Product Pages\n\nProduct pages are dynamically generated in `gatsby-node.js` using data from Airtable. Each product has:\n- A regular page at `/product/{slug}/`\n- An AMP version at `/product/{slug}/amp/`\n\n### Checkout Process\n\nThe checkout flow uses:\n1. Formik for form handling and validation in `src/app/components/checkout-form.js`\n2. Netlify Lambda function in `src/lambda/payment.js` for creating Coinbase Commerce charges\n3. Redirects to Coinbase Commerce for payment processing\n\n### Styling\n\nThe site uses Spectre CSS framework with custom SCSS in `src/scss/spectre.scss`\n\n## Common Patterns\n\n- Use the Gatsby `Link` component for internal navigation\n- Use the Reach Router for client-side routing in the app directory\n- Fetch data from Airtable using Gatsby's GraphQL data layer\n- Process payments by creating charges via the Coinbase Commerce API\n\n## Best Practices\n\n- Keep Lambda functions small and focused\n- Use environment variables for sensitive values\n- Follow the existing pattern for styling components\n- Use the Gatsby Image component for optimized images\n",
+  "commands": [
+    {
+      "command": "npm install",
+      "description": "Install project dependencies"
+    },
+    {
+      "command": "npm run develop",
+      "description": "Start Gatsby development server"
+    },
+    {
+      "command": "npm start",
+      "description": "Start both Gatsby and Netlify Lambda development servers"
+    },
+    {
+      "command": "npm run build",
+      "description": "Build the site and Lambda functions for production"
+    },
+    {
+      "command": "npm run format",
+      "description": "Format code with Prettier"
+    },
+    {
+      "command": "netlify-lambda serve src/lambda",
+      "description": "Run only the Netlify Lambda functions locally"
+    }
+  ],
+  "mcps": [
+    {
+      "name": "Gatsby Documentation",
+      "url": "https://www.gatsbyjs.org/docs/"
+    },
+    {
+      "name": "React Documentation",
+      "url": "https://reactjs.org/docs/"
+    },
+    {
+      "name": "Netlify Functions",
+      "url": "https://docs.netlify.com/functions/overview/"
+    },
+    {
+      "name": "Airtable API",
+      "url": "https://airtable.com/api"
+    },
+    {
+      "name": "Coinbase Commerce API",
+      "url": "https://commerce.coinbase.com/docs/"
+    },
+    {
+      "name": "Formik Documentation",
+      "url": "https://formik.org/docs/"
+    },
+    {
+      "name": "Spectre CSS Documentation",
+      "url": "https://picturepan2.github.io/spectre/"
+    }
+  ]
+}
