@@ -53,6 +53,9 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
     ├── gatsby-config.js
     ├── gatsby-node.js
     ├── gatsby-ssr.js
+    ├── jest.config.js
+    ├── jest.setup.js
+    ├── jest-preprocess.js
     ├── LICENSE
     ├── package-lock.json
     ├── package.json
@@ -81,6 +84,45 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
 11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
 
 12. **`README.md`**: A text file containing useful reference information about your project.
+
+13. **`jest.config.js`**: Configuration file for Jest testing framework.
+
+14. **`jest.setup.js`**: Setup file for Jest tests, including visual regression testing configuration.
+
+15. **`jest-preprocess.js`**: Preprocessor for Jest to handle Gatsby's Babel configuration.
+
+## 📸 Visual Regression Testing
+
+The project includes visual regression testing infrastructure to ensure that changes don't unexpectedly affect the UI.
+
+### Running Visual Tests
+
+1. **Start the development server**:
+```sh
+npm run develop
+```
+
+2. **Run the visual tests**:
+```sh
+npm run test:visual
+```
+
+This will capture screenshots of key pages and compare them with the baseline images.
+
+3. **Update baseline images** (when intentional UI changes are made):
+```sh
+npm run test:visual:update
+```
+
+### Visual Test Structure
+
+The visual tests are located in `src/__tests__/visual/` directory and use Puppeteer to capture screenshots of different components and pages:
+
+- `homepage.visual.js`: Tests the homepage appearance
+- `checkout-form.visual.js`: Tests the checkout form
+- `product-page.visual.js`: Tests the product page and product image
+
+The utility functions for visual testing are in `src/utils/visualTest.js`.
 
 ## 🎓 Learning Gatsby
 
