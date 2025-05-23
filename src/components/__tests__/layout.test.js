@@ -1,49 +1,21 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Layout from '../layout';
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import Layout from '../layout'
 
-// Mock gatsby's useStaticQuery
-jest.mock('gatsby', () => ({
-  useStaticQuery: jest.fn().mockImplementation(() => ({
-    site: {
-      siteMetadata: {
-        title: 'NYHYPE',
-      },
-    },
-  })),
-  graphql: jest.fn(),
-  Link: jest.fn().mockImplementation(
-    // these props are invalid for an `a` tag
-    ({
-      activeClassName,
-      activeStyle,
-      getProps,
-      innerRef,
-      partiallyActive,
-      ref,
-      replace,
-      to,
-      ...rest
-    }) => 
-      React.createElement("a", {
-        ...rest,
-        href: to,
-      })
-    ),
-}));
+// The gatsby mock is handled by the global __mocks__/gatsby.js file
 
 // Mock the Header and Footer components
 jest.mock('../header', () => {
   return function DummyHeader() {
-    return <div data-testid="header">Header</div>;
-  };
-});
+    return <div data-testid="header">Header</div>
+  }
+})
 
 jest.mock('../footer', () => {
   return function DummyFooter() {
-    return <div data-testid="footer">Footer</div>;
-  };
-});
+    return <div data-testid="footer">Footer</div>
+  }
+})
 
 describe('Layout component', () => {
   it('renders children', () => {
@@ -51,19 +23,19 @@ describe('Layout component', () => {
       <Layout>
         <main>Test content</main>
       </Layout>
-    );
-    
-    expect(screen.getByText('Test content')).toBeInTheDocument();
-  });
+    )
+
+    expect(screen.getByText('Test content')).toBeInTheDocument()
+  })
 
   it('renders header and footer', () => {
     render(
       <Layout>
         <main>Test content</main>
       </Layout>
-    );
-    
-    expect(screen.getByTestId('header')).toBeInTheDocument();
-    expect(screen.getByTestId('footer')).toBeInTheDocument();
-  });
-});
+    )
+
+    expect(screen.getByTestId('header')).toBeInTheDocument()
+    expect(screen.getByTestId('footer')).toBeInTheDocument()
+  })
+})

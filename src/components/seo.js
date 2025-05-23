@@ -4,19 +4,17 @@ import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
 function SEO({ description, lang, meta, keywords, title }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query DefaultSEOQuery {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
+  const { site } = useStaticQuery(graphql`
+    query DefaultSEOQuery {
+      site {
+        siteMetadata {
+          title
+          description
+          author
         }
       }
-    `
-  )
+    }
+  `)
 
   const metaDescription = description || site.siteMetadata.description
 
@@ -71,8 +69,6 @@ function SEO({ description, lang, meta, keywords, title }) {
         )
         .concat(meta)}
     />
-  )
-}
   )
 }
 

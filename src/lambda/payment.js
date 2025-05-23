@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch'
 const { CB_COMMERCE_API_KEY } = process.env
 const API_ENDPOINT = 'https://api.commerce.coinbase.com/charges'
 
-exports.handler = async event => {
+exports.handler = async (event) => {
   const params = JSON.parse(event.body)
   const { email, firstName, lastName, price, title, productId } = params
   try {
@@ -28,7 +28,7 @@ exports.handler = async event => {
         },
         pricing_type: 'fixed_price',
       }),
-    }).then(response => response.json())
+    }).then((response) => response.json())
     console.log(
       `${email}: ${firstName} ${lastName} created charge of ${price} for ${productId}!`
     )

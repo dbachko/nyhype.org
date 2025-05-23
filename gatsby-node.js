@@ -12,7 +12,7 @@ const createTitle = ({ Brand, Name, Color, Size }) =>
   `${Brand.join(' × ')} ${Name} ${Color} ${Size}`
 
 // Create product slug from it's title.
-const createSlug = title => `/product/${slugify(title)}/`
+const createSlug = (title) => `/product/${slugify(title)}/`
 
 exports.onCreateNode = async ({
   node,
@@ -69,11 +69,32 @@ exports.onCreateNode = async ({
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  const productTpl = path.resolve('./src/templates/product-template.js')
-  const productTplAmp = path.resolve('./src/templates/product-template.amp.js')
-  return new Promise((resolve, reject) => {
-    resolve(
-      graphql(`
+
+  try {
+    // Use a simple query to check if Airtable plugin is installed
+    const checkAirtable = await graphql(`
+      query {
+        __schema {
+          types {
+            name
+          }
+        }
+      }
+    `)
+
+    const hasAirtableType = checkAirtable.data.__schema.types.some(
+      (type) => type.name === 'Airtable' || type.name === 'AirtableConnection'
+    )
+
+    if (!hasAirtableType) {
+      console.log(
+        'Airtable plugin is not installed or configured, skipping product page creation'
+      )
+      return
+    }
+
+    try {
+      const result = await graphql(`
         {
           allAirtable {
             edges {
@@ -105,11 +126,20 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
-      `).then(async result => {
-        if (result.error) {
-          reject(result.error)
-        }
-        const products = result.data.allAirtable.edges.map(edge => edge.node)
+      `)
+
+      if (result.errors) {
+        console.error('Error querying Airtable data:', result.errors)
+        return
+      }
+
+      if (result.data && result.data.allAirtable) {
+        const products = result.data.allAirtable.edges.map((edge) => edge.node)
+        const productTpl = path.resolve('./src/templates/product-template.js')
+        const productTplAmp = path.resolve(
+          './src/templates/product-template.amp.js'
+        )
+
         // Create a page for each product.
         for (let { id, fields } of products) {
           // Create regular product page.
@@ -118,6 +148,7 @@ exports.createPages = async ({ graphql, actions }) => {
             component: productTpl,
             context: { id, fields },
           })
+
           // Create amp version of a product page.
           await createPage({
             path: `${fields.slug}amp/`,
@@ -125,7 +156,11 @@ exports.createPages = async ({ graphql, actions }) => {
             context: { id, fields },
           })
         }
-      })
-    )
-  })
+      }
+    } catch (innerError) {
+      console.log('Error in Airtable query:', innerError.message)
+    }
+  } catch (error) {
+    console.error('Error in createPages:', error)
+  }
 }

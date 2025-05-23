@@ -6,15 +6,7 @@ import ShippingAddressForm from './components/checkout-form'
 
 const CheckoutForm = ({ productId, location }) => {
   const { fields } = location.state
-  const {
-    brand,
-    color,
-    cover,
-    name,
-    price,
-    size,
-    title,
-  } = fields
+  const { brand, color, cover, name, price, size, title } = fields
   return (
     <>
       <div className="container">
