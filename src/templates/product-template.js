@@ -10,20 +10,10 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 
 export default ({ pageContext: { id, fields } }) => {
-  const {
-    brand,
-    color,
-    cover,
-    desc,
-    name,
-    price,
-    season,
-    size,
-    slug,
-    title,
-  } = fields
+  const { brand, color, cover, desc, name, price, season, size, slug, title } =
+    fields
 
-  const handleClick = async function() {
+  const handleClick = async function () {
     await navigate(`/checkout/${id}`, { state: { fields } })
   }
 

@@ -3,7 +3,7 @@ import React from 'react'
 import { string, object } from 'yup'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 
-const CheckoutForm = props => {
+const CheckoutForm = (props) => {
   const validationSchema = object().shape({
     address: string().required('Address is required!'),
     city: string().required('City is required!'),
@@ -48,7 +48,7 @@ const CheckoutForm = props => {
             ...values,
           }),
         })
-          .then(response => response.json())
+          .then((response) => response.json())
           .then(({ url }) => {
             // Redirect customer to cb commerce checkout.
             window.location.href = url

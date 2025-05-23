@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci --legacy-peer-deps
+      
+    - name: Format check
+      run: npx prettier --check "src/**/*.js"
+      
+    - name: Run unit tests
+      run: npm test
+      
+    # Skip actual build since we've removed Airtable dependencies for CI
+    # The build would be done properly when run in an environment with real credentials
+    - name: Check modules can be required
+      run: |
+        node -e "require('./gatsby-config.js')" 
+        node -e "require('./gatsby-node.js')"
+        echo "Build check completed"
+      env:
+        CI: false  # Prevents build failures on warnings
+        
+  # Uncomment when site is deployed and environment variables are configured
+  # visual-tests:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #   
+  #   - name: Setup Node.js
+  #     uses: actions/setup-node@v4
+  #     with:
+  #       node-version: 18
+  #       cache: 'npm'
+  #   
+  #   - name: Install dependencies
+  #     run: npm ci --legacy-peer-deps
+  #     
+  #   - name: Run Cypress visual tests
+  #     uses: cypress-io/github-action@v6
+  #     with:
+  #       start: npm run develop
+  #       wait-on: 'http://localhost:8000'
+  #     env:
+  #       GATSBY_AIRTABLE_KEY: ${{ secrets.AIRTABLE_KEY }}
+  #       GATSBY_AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+  #       GATSBY_TABLE_NAME: ${{ secrets.TABLE_NAME }}

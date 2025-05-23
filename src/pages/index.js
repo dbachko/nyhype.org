@@ -18,11 +18,13 @@ const IndexPage = () => (
       <span className="chip">
         <img className="avatar avatar-sm" src={BTC} alt="Bitcoin" />
         Bitcoin
-      </span>,{' '}
+      </span>
+      ,{' '}
       <span className="chip">
         <img className="avatar avatar-sm" src={LTC} alt="Bitcoin" />
         Litecoin
-      </span> or{' '}
+      </span>{' '}
+      or{' '}
       <span className="chip">
         <img className="avatar avatar-sm" src={ETH} alt="Bitcoin" />
         Ethereum
