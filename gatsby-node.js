@@ -5,14 +5,26 @@
  */
 
 const path = require('path')
-const slugify = require('@sindresorhus/slugify')
+// Import slugify as ES module
+let slugifyModule
+
+// Initialize slugify module
+const getSlugify = async () => {
+  if (!slugifyModule) {
+    slugifyModule = await import('@sindresorhus/slugify')
+  }
+  return slugifyModule.default
+}
 
 // Create product title from it's fields.
 const createTitle = ({ Brand, Name, Color, Size }) =>
   `${Brand.join(' × ')} ${Name} ${Color} ${Size}`
 
 // Create product slug from it's title.
-const createSlug = (title) => `/product/${slugify(title)}/`
+const createSlug = async (title) => {
+  const slugify = await getSlugify()
+  return `/product/${slugify(title)}/`
+}
 
 exports.onCreateNode = async ({
   node,
@@ -58,7 +70,7 @@ exports.onCreateNode = async ({
       value: title,
     })
     // Generate slug field.
-    const slug = createSlug(title)
+    const slug = await createSlug(title)
     createNodeField({
       node,
       name: 'slug',
