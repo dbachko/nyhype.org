@@ -28,7 +28,7 @@ jest.mock('gatsby', () => {
 
 describe('SEO component', () => {
   it('renders with default props', () => {
-    render(<SEO />)
+    render(<SEO title="Default Title" />)
     // Since we're mocking Helmet, we're just checking that the component renders without error
     expect(true).toBe(true)
   })
