@@ -13,19 +13,15 @@ module.exports = {
     title: `NYHYPE`,
     description: `Buy Supreme with crypto.`,
     author: `@nyhype`,
+    siteUrl: `https://nyhype.org`,
   },
   // for avoiding CORS while developing Netlify Functions locally
   // read more: https://www.gatsbyjs.org/docs/api-proxy/#advanced-proxying
-  developMiddleware: app => {
-    app.use(
-      '/.netlify/functions/',
-      createProxyMiddleware({
-        target: 'http://localhost:9000',
-        pathRewrite: {
-          '/.netlify/functions/': '',
-        },
-      })
-    )
+  // developMiddleware API was removed in Gatsby v5
+  // Use the new devServer.setupMiddlewares API
+  proxy: {
+    prefix: '/.netlify/functions',
+    url: 'http://localhost:9000',
   },
   plugins: [
     {
